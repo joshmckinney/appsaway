@@ -1,0 +1,10 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    <div style="text-align: center;">
+        <img src="/static/favicon/favicon.png">
+        <h1>404</h1>
+        <p><em>{{ request.get_full_path }}</em></p>
+        <h2>This ship has sailed..</h2>
+        <a class="btn btn-primary btn-sm btn-primary" href="javascript:history.go(-1);">Go Back</a>
+    </div>
+{% endblock %}

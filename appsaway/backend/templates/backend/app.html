@@ -1,0 +1,189 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    <div style="margin: 25px;">
+        <div class="row justify-content-center" style="padding-bottom: 50px;">
+            <div class="col-md-auto">
+                <div class="card text-white bg-dark card-body" style="padding-bottom: 20px;">
+                    <h1>Application:</h1>
+                        {% if app_type == 'Contract' %}
+                            <div class="d-flex flex-row justify-content-around flex-wrap border" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; ">
+                                    <strong><u>ID</u></strong>
+                                    {{ application.app_id }}
+                                </div>
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; text-align: center;">
+                                    <strong><u>Type</u></strong>
+                                    {{ app_type }}
+                                </div>
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; text-align: center;">
+                                    <strong><u>Job Title</u></strong>
+                                    {{ application.app_job_title }}
+                                </div>
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; text-align: center;">
+                                    <strong><u>Company</u></strong>
+                                    {{ application.company }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <strong>Status:</strong>
+                                &ensp;{{ application.status }}
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>App Date:</strong>
+                                    &ensp;{{ application.app_date }}
+                                </div>
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Follow-up Date:</strong>
+                                    &ensp;{{ application.followup_date }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Contract Start:</strong>
+                                    &ensp;{{ application.contract_start }}
+                                </div>
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Contract End:</strong>
+                                    &ensp;{{ application.contract_end }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Interview Date:</strong>
+                                    &ensp;{{ application.interview_date }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Notes:</strong>
+                                    &ensp;{{ application.app_notes }}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if app_type == 'Freelance' %}
+                            <div class="d-flex flex-row justify-content-around flex-wrap border" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; ">
+                                    <strong><u>ID</u></strong>
+                                    {{ application.app_id }}
+                                </div>
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; text-align: center;">
+                                    <strong><u>Type</u></strong>
+                                    {{ app_type }}
+                                </div>
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; text-align: center;">
+                                    <strong><u>Job Title</u></strong>
+                                    {{ application.app_job_title }}
+                                </div>
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; text-align: center;">
+                                    <strong><u>Company</u></strong>
+                                    {{ application.company }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <strong>Status:</strong>
+                                &ensp;{{ application.status }}
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>App Date:</strong>
+                                    &ensp;{{ application.app_date }}
+                                </div>
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Follow-up Date:</strong>
+                                    &ensp;{{ application.followup_date }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Job Details:</strong>
+                                    &ensp;{{ application.freelance_details }}
+                                </div>
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Bid Amount:</strong>
+                                    &ensp;{{ application.freelance_bid }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Interview Date:</strong>
+                                    &ensp;{{ application.interview_date }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Notes:</strong>
+                                    &ensp;{{ application.app_notes }}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if app_type == 'Permanent' %}
+                            <div class="d-flex flex-row justify-content-around flex-wrap border" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; ">
+                                    <strong><u>ID</u></strong>
+                                    {{ application.app_id }}
+                                </div>
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; text-align: center;">
+                                    <strong><u>Type</u></strong>
+                                    {{ app_type }}
+                                </div>
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; text-align: center;">
+                                    <strong><u>Job Title</u></strong>
+                                    {{ application.app_job_title }}
+                                </div>
+                                <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; text-align: center;">
+                                    <strong><u>Company</u></strong>
+                                    {{ application.company }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <strong>Status:</strong>
+                                &ensp;{{ application.status }}
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>App Date:</strong>
+                                    &ensp;{{ application.app_date }}
+                                </div>
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Follow-up Date:</strong>
+                                    &ensp;{{ application.followup_date }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Interview Date:</strong>
+                                    &ensp;{{ application.interview_date }}
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                                <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                                    <strong>Notes:</strong>
+                                    &ensp;{{ application.app_notes }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                        <div>
+                            <a class="btn btn-primary btn-sm btn-secondary" style="margin: 5px;" href="{% url 'applist' %}">Back to Apps</a>
+                            <a class="btn btn-primary btn-sm btn-info" style="margin: 5px;" href="{% url 'company' application.company.pk %}">View Company</a>
+                        </div>
+                        <div>
+                            <a class="btn btn-primary btn-sm btn-warning" style="margin: 5px;" href="{% url 'editapp' application.pk %}">Edit</a>
+                            <script>
+                            function deleteApp() {
+                                var appDelete = confirm("Are you sure you want to delete {{ application.app_job_title }}?")
+                                if(appDelete == true) {
+                                    window.open('{% url 'deleteapp' application.pk %}', '_self')
+                                    return true;
+                                }
+                            }
+                            </script>
+                            <a class="btn btn-primary btn-sm btn-danger" style="margin: 5px;" href="javascript: deleteApp()">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

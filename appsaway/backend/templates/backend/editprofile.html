@@ -1,0 +1,109 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    {% if messages %}
+       <script>
+        {% for message in messages %}
+            alert("{{ message }}");
+            location.href='{% url 'profile' %}'
+        {% endfor %}
+       </script>
+    {% endif %}
+    <script>
+    function showPassword() {
+      var x = document.getElementById("password_update");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      }
+    }
+    function showDeleteUser() {
+      var x = document.getElementById("delete_confirm");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+          x.style.display = "none"
+      }
+      var y = document.getElementById("delete_safe");
+      if (y.style.display === "none") {
+        y.style.display = "block";
+      } else {
+          y.style.display = "none"
+      }
+    }
+    function deleteUser() {
+        var profileDelete = confirm("WARNING!!! Do you really want to delete your account and all associated data?")
+        if(profileDelete == true) {
+            window.open('{% url 'deleteprofile' %}', '_self')
+            return true;
+        }
+    }
+    </script>
+    <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px;">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card text-white bg-dark card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <h1>Edit User Profile</h1>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-sm">
+                                <tr>
+                                    <th>{{ profile_form.username.label}}</th>
+                                    <td>{{ profile_form.username }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ profile_form.email.label }}</th>
+                                    <td>{{ profile_form.email }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="display: flex; flex-direction: row; justify-content: center">
+                            <input class="btn btn-primary btn-sm btn-primary" type="submit" value="Update" name="Update">
+                            <a class="btn btn-primary btn-sm btn-warning" style="margin-left:5px" href="javascript:showPassword()">Change Password</a>
+                            <a class="btn btn-primary btn-sm btn-secondary" style="margin-left:5px" href="javascript:goBack()">Cancel</a>
+                        </div>
+                    </form>
+                    <form id="password_update" style="display: none;" method="post">
+                        {% csrf_token %}
+                        <div class="table-responsive">
+                            <table class="table table-dark table-sm">
+                                <br>
+                                <p>Change Password:</p>
+                                <tr>
+                                    <th>{{ password_form.password1.label }}</th>
+                                    <td>{{ password_form.password1 }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ password_form.password2.label }}</th>
+                                    <td>{{ password_form.password2 }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="display: flex; flex-direction: row; justify-content: center">
+                            <input class="btn btn-primary btn-sm btn-danger" type="submit" value="Update" name="Change Password">
+                        </div>
+                    </form>
+                    </br>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <br>
+                <div style="display: flex; flex-direction: row; justify-content: center">
+                    <a id="delete_safe" class="btn btn-primary btn-sm btn-danger" style="margin-left:5px" href="javascript:showDeleteUser()">Delete Account</a>
+                </div>
+                <br>
+                <div id="delete_confirm" style="display: none; text-align: center">
+                    <p>Deleting your account is NOT reversible!
+                        Please make sure you've gathered any records you wish to keep.
+                        We hope you've found AppsAway helpful.</p>
+                    <div style="display: flex; flex-direction: row; justify-content: center">
+                        <a class="btn btn-primary btn-sm btn-danger" style="margin-left:5px" href="javascript:deleteUser()">Confirm Delete</a>
+                        <a class="btn btn-primary btn-sm btn-secondary" style="margin-left:5px" href="javascript:showDeleteUser()">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

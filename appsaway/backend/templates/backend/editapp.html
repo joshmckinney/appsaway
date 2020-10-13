@@ -1,0 +1,136 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    {% if messages %}
+       <script>
+        {% for message in messages %}
+            alert("{{ message }}");
+            location.href='{% url 'app' application.pk %}'
+        {% endfor %}
+       </script>
+    {% endif %}
+    <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px;">
+        <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <div class="card text-white bg-dark card-body">
+                    <h1>Edit Application</h1>
+                    {% if app_type == 'contract' %}
+                    <form id="contract" method="POST" action="">
+                        {% csrf_token %}
+                        <br>
+                        <div class="d-flex flex-row justify-content-center flex-wrap">
+                            <div style="margin: 5px;">{{ form.company }}</div>
+                            <div style="margin: 5px;">{{ form.status }}</div>
+                        </div><br>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-sm">
+                                <tr>
+                                    <td>{{ form.app_job_title }}</td>
+                                    <td>{{ form.app_notes }}</td>
+                                </tr>
+                                <tr style="text-align: center">
+                                    <td>Contract Start:<br><input type="date" id="datepicker" name="contract_start" required></td>
+                                    <td>Contract End:<br><input type="date" id="datepicker" name="contract_end" required></td>
+                                </tr>
+                                <tr style="text-align: center">
+                                    <td>App Date:<br><input style="width: 100%;" placeholder="App Date" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="app_date" value="{{ application.app_date }}" required></td>
+                                    <td>Follow-up Date<br><input style="width: 100%;" placeholder="Follow-up Date" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="followup_date" value="{{ application.followup_date }}"></td>
+                                </tr>
+                                <tr style="text-align: center">
+                                    <td colspan="2">Interview Date:<br><input style="width: 50%;" placeholder="Interview Date" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="interview_date" value="{{ application.interview_date }}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="d-flex flex-row justify-content-center flex-nowrap">
+                            <input type="number" name="user" value="{{ user.pk }}" hidden>
+                            <input style="margin-right: 5px;" class="btn btn-primary btn-sm btn-primary" type="submit" value="Create" name="Create">
+                            <a style="margin-left: 5px;" class="btn btn-primary btn-sm btn-secondary" href="javascript:goBack()">Cancel</a>
+                        </div>
+                    </form>
+                    {% endif %}
+                    {% if app_type == 'freelance' %}
+                    <form id="freelance" method="POST" action="">
+                        {% csrf_token %}
+                        <br>
+                        <div class="d-flex flex-row justify-content-center flex-wrap">
+                            <div style="margin: 5px;">{{ form.company }}</div>
+                            <div style="margin: 5px;">{{ form.status }}</div>
+                        </div><br>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-sm" style="text-align: center">
+                                <tr>
+                                    <td>{{ form.app_job_title }}</td>
+                                    <td>{{ form.app_notes }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Job Details:<br>{{ form.freelance_details }}</td>
+                                    <td>Bid Amount:<br>{{ form.freelance_bid }}</td>
+                                </tr>
+                                <tr style="text-align: center">
+                                    <td>App Date:<br><input style="width: 100%;" placeholder="App Date" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="app_date" value="{{ application.app_date }}" required></td>
+                                    <td>Follow-up Date<br><input style="width: 100%;" placeholder="Follow-up Date" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="followup_date" value="{{ application.followup_date }}"></td>
+                                </tr>
+                                <tr style="text-align: center">
+                                    <td colspan="2">Interview Date:<br><input style="width: 50%;" placeholder="Interview Date" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="interview_date" value="{{ application.interview_date }}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="d-flex flex-row justify-content-center flex-nowrap">
+                            <input type="number" name="user" value="{{ user.pk }}" hidden>
+                            <input style="margin-right: 5px;" class="btn btn-primary btn-sm btn-primary" type="submit" value="Create" name="Create">
+                            <a style="margin-left: 5px;" class="btn btn-primary btn-sm btn-secondary" href="javascript:goBack()">Cancel</a>
+                        </div>
+                    </form>
+                    {% endif %}
+                    {% if app_type == 'permanent' %}
+                    <form id="permanent" method="POST" action="">
+                        {% csrf_token %}
+                        <br>
+                        <div class="d-flex flex-row justify-content-center flex-wrap">
+                            <div style="margin: 5px;">{{ form.company }}</div>
+                            <div style="margin: 5px;">{{ form.status }}</div>
+                        </div><br>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-sm">
+                                <tr>
+                                    <td>{{ form.app_job_title }}</td>
+                                    <td>{{ form.app_notes }}</td>
+                                </tr>
+                                <tr style="text-align: center">
+                                    <td>App Date:<br><input style="width: 100%;" placeholder="App Date" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="app_date" value="{{ application.app_date }}" required></td>
+                                    <td>Follow-up Date:<br><input style="width: 100%;" placeholder="Follow-up Date" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="followup_date" value="{{ application.followup_date }}"></td>
+                                </tr>
+                                <tr style="text-align: center">
+                                    <td colspan="2">Interview Date:<br><input style="width: 50%;" placeholder="Interview Date" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="interview_date" value="{{ application.interview_date }}"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="d-flex flex-row justify-content-center flex-nowrap">
+                            <input type="number" name="user" value="{{ user.pk }}" hidden>
+                            <input style="margin-right: 5px;" class="btn btn-primary btn-sm btn-primary" type="submit" value="Create" name="Create">
+                            <a style="margin-left: 5px;" class="btn btn-primary btn-sm btn-secondary" href="javascript:goBack()">Cancel</a>
+                        </div>
+                    </form>
+                    {% endif %}
+                    </br>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

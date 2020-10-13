@@ -1,0 +1,35 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px;">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card text-white bg-dark card-body">
+                    <div class="table-responsive">
+                        <h1>User Profile</h1>
+                        <table class="table table-dark table-sm">
+                            <tr>
+                                <th>Username:</th>
+                                <td>{{ user.get_username }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Password:</th>
+                                <td>********</td>
+                            </tr>
+                            <tr>
+                                <th>Joined:</th>
+                                <td>{{ user.date_joined }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="display: flex; flex-direction: row; justify-content: center">
+                        <a class="btn btn-primary btn-sm btn-primary" href="{% url 'editprofile' %}">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

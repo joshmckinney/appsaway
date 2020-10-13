@@ -1,0 +1,207 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    {% url 'createapp' as createapp %}
+    <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px;">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div style="text-align: center;">
+                    <h1>Applications</h1>
+                    <div>
+                        <a class="btn btn-primary btn-sm btn-primary" href="{{ createapp }}">Create Application</a>
+                        Total: {{ application_count }}
+                    </div>
+                    <br>
+                </div>
+                <div class="card text-white bg-dark card-body">
+                    <form method="get">
+                        {% if app_type == 'all' %}
+                            <div class="d-flex flex-row justify-content-center flex-wrap">
+                                <div class="d-inline-flex flex-row justify-content-center flex-wrap">
+                                    <div style="margin: 5px;">{{ app_filter.form.company }}</div>
+                                    <div style="margin: 5px;">{{ app_filter.form.status }}</div>
+                                    <div style="margin: 5px;">
+                                        <select name="app_type">
+                                            <option value="all_types" {% if app_type == 'all' %}selected{% endif %}>Select App Type:</option>
+                                            <option value="contract_type" {% if app_type == 'contract' %}selected{% endif %}>Contract</option>
+                                            <option value="freelance_type" {% if app_type == 'freelance' %}selected{% endif %}>Freelance</option>
+                                            <option value="permanent_type" {% if app_type == 'permanent' %}selected{% endif %}>Permanent</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-inline-flex flex-row justify-content-center flex-wrap">
+                                    <div style="margin: 5px;">{{ app_filter.form.job_title }}</div>
+                                    <div style="margin: 5px;">{{ app_filter.form.note }}</div>
+                                    <div class="d-inline-flex flex-row justify-content-center flex-wrap" style="margin: 5px;">
+                                        <input placeholder="Apps After" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker"
+                                               name="app_after" style="width: 225px;"
+                                               value="{% if app_after %}{{ app_after }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-end flex-nowrap">
+                                    <div style="margin: 5px;">
+                                        <a class="btn btn-primary btn-sm btn-secondary" href="{% url 'applist' %}">Reset</a>
+                                    </div>
+                                    <div style="margin: 5px;">
+                                        <button class="btn btn-primary btn-sm btn-primary" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if app_type == 'contract' %}
+                            <div class="d-flex flex-row justify-content-center flex-wrap">
+                                <div class="d-inline-flex flex-row justify-content-center flex-wrap">
+                                    <div style="margin: 5px;">{{ contract_filter.form.company }}</div>
+                                    <div style="margin: 5px;">{{ contract_filter.form.status }}</div>
+                                    <div style="margin: 5px;">
+                                        <select name="app_type">
+                                            <option value="all_types" {% if app_type == 'all' %}selected{% endif %}>Select App Type:</option>
+                                            <option value="contract_type" {% if app_type == 'contract' %}selected{% endif %}>Contract</option>
+                                            <option value="freelance_type" {% if app_type == 'freelance' %}selected{% endif %}>Freelance</option>
+                                            <option value="permanent_type" {% if app_type == 'permanent' %}selected{% endif %}>Permanent</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-inline-flex flex-row justify-content-center flex-wrap">
+                                    <div style="margin: 5px;">{{ contract_filter.form.job_title }}</div>
+                                    <div style="margin: 5px;">{{ contract_filter.form.note }}</div>
+                                    <div class="d-inline-flex flex-row justify-content-center flex-wrap" style="margin: 5px;">
+                                        <input placeholder="Apps After" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker"
+                                               name="app_after" style="width: 225px;"
+                                               value="{% if app_after %}{{ app_after }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-end flex-nowrap">
+                                    <div style="margin: 5px;">
+                                        <a class="btn btn-primary btn-sm btn-secondary" href="{% url 'applist' %}">Reset</a>
+                                    </div>
+                                    <div style="margin: 5px;">
+                                        <button class="btn btn-primary btn-sm btn-primary" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if app_type == 'freelance' %}
+                            <div class="d-flex flex-row justify-content-center flex-wrap">
+                                <div class="d-inline-flex flex-row justify-content-center flex-wrap">
+                                    <div style="margin: 5px;">{{ freelance_filter.form.company }}</div>
+                                    <div style="margin: 5px;">{{ freelance_filter.form.status }}</div>
+                                    <div style="margin: 5px;">
+                                        <select name="app_type">
+                                            <option value="all_types" {% if app_type == 'all' %}selected{% endif %}>Select App Type:</option>
+                                            <option value="contract_type" {% if app_type == 'contract' %}selected{% endif %}>Contract</option>
+                                            <option value="freelance_type" {% if app_type == 'freelance' %}selected{% endif %}>Freelance</option>
+                                            <option value="permanent_type" {% if app_type == 'permanent' %}selected{% endif %}>Permanent</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-inline-flex flex-row justify-content-center flex-wrap">
+                                    <div style="margin: 5px;">{{ freelance_filter.form.job_title }}</div>
+                                    <div style="margin: 5px;">{{ freelance_filter.form.note }}</div>
+                                    <div class="d-inline-flex flex-row justify-content-center flex-wrap" style="margin: 5px;">
+                                        <input placeholder="Apps After" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker"
+                                               name="app_after" style="width: 225px;"
+                                               value="{% if app_after %}{{ app_after }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-end flex-nowrap">
+                                    <div style="margin: 5px;">
+                                        <a class="btn btn-primary btn-sm btn-secondary" href="{% url 'applist' %}">Reset</a>
+                                    </div>
+                                    <div style="margin: 5px;">
+                                        <button class="btn btn-primary btn-sm btn-primary" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if app_type == 'permanent' %}
+                            <div class="d-flex flex-row justify-content-center flex-wrap">
+                                <div class="d-inline-flex flex-row justify-content-center flex-wrap">
+                                    <div style="margin: 5px;">{{ permanent_filter.form.company }}</div>
+                                    <div style="margin: 5px;">{{ permanent_filter.form.status }}</div>
+                                    <div style="margin: 5px;">
+                                        <select name="app_type">
+                                            <option value="all_types" {% if app_type == 'all' %}selected{% endif %}>Select App Type:</option>
+                                            <option value="contract_type" {% if app_type == 'contract' %}selected{% endif %}>Contract</option>
+                                            <option value="freelance_type" {% if app_type == 'freelance' %}selected{% endif %}>Freelance</option>
+                                            <option value="permanent_type" {% if app_type == 'permanent' %}selected{% endif %}>Permanent</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-inline-flex flex-row justify-content-center flex-wrap">
+                                    <div style="margin: 5px;">{{ permanent_filter.form.job_title }}</div>
+                                    <div style="margin: 5px;">{{ permanent_filter.form.note }}</div>
+                                    <div class="d-inline-flex flex-row justify-content-center flex-wrap" style="margin: 5px;">
+                                        <input placeholder="Apps After" onfocusin="(this.type='date')"
+                                               onfocusout="(this.type='text')" type="text" id="datepicker"
+                                               name="app_after" style="width: 225px;"
+                                               value="{% if app_after %}{{ app_after }}{% endif %}">
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-end flex-nowrap">
+                                    <div style="margin: 5px;">
+                                        <a class="btn btn-primary btn-sm btn-secondary" href="{% url 'applist' %}">Reset</a>
+                                    </div>
+                                    <div style="margin: 5px;">
+                                        <button class="btn btn-primary btn-sm btn-primary" type="submit">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-sm" style="margin-top: 25px; text-align: center">
+                        {% if applications %}
+                            <tr>
+                                <th>Job Title</th>
+                                <th>Company</th>
+                                <th>App Date</th>
+                                <th>Follow-up Date</th>
+                                <th>Notes</th>
+                                <th>View</th>
+                            </tr>
+                            {% for application in applications %}
+                            <tr>
+                                <td>{{ application.app_job_title }}</td>
+                                <td>{{ application.company }}</td>
+                                <td>{{ application.app_date }}</td>
+                                <td>{{ application.followup_date }}</td>
+                                <td>{{ application.app_notes }}</td>
+                                <td><a class="btn btn-primary btn-sm btn-primary" href="{% url 'app' application.pk %}">View</a></td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <th>No Applications</th>
+                            </tr>
+                        {% endif %}
+                    </table>
+                    </div>
+                    {% if applications.has_other_pages %}
+                        <ul class="pagination">
+                        {% if applications.has_previous %}
+                          <li><a href="?page={{ applications.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in applications.paginator.page_range %}
+                          {% if applications.number == i %}
+                            <li class="active"><span>{{ i }}<span class="sr-only">(current)</span></span></li>
+                          {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                        {% if applications.has_next %}
+                          <li><a href="?page={{ applications.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

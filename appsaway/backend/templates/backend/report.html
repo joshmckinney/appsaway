@@ -1,0 +1,37 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px; text-align: center">
+        <h1>Application Report</h1>
+        {{ startdate }} - {{ enddate }}
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div style="margin-top: 25px;" class="card text-white bg-dark card-body">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-sm table-stripes">
+                            <tr>
+                                <th>App Id</th>
+                                <th>Job Title</th>
+                                <th>Company</th>
+                                <th>App Date</th>
+                                <th>Follow-up Date</th>
+                                <th>App Notes</th>
+                                <th>Last Updated</th>
+                            </tr>
+                            {% for application in applications %}
+                            <tr>
+                                <td>{{ application.pk }}</td>
+                                <td>{{ application.app_job_title }}</td>
+                                <td>{{ application.company }}</td>
+                                <td>{{ application.app_date }}</td>
+                                <td>{{ application.followup_date }}</td>
+                                <td>{{ application.app_notes }}</td>
+                                <td>{{ application.last_updated }}</td>
+                            </tr>
+                            {% endfor%}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

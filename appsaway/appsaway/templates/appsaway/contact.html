@@ -1,0 +1,22 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px; text-align: center;">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <h1>Contact</h1>
+                <p>Have any questions, comments, or concerns? Any and all feedback is greatly appreciated!</p>
+                <div class="card text-white bg-dark card-body">
+                    <form style="margin-top: 25px" method="POST" action="" rel="noopener" target="_blank">
+                    {% csrf_token %}
+                    {{ form.subject.label }}:<br>
+                    {{ form.subject }} <br>
+                    {{ form.message.label }}:<br>
+                    {{ form.message }} <br><br>
+                    <input class="btn btn-primary btn-sm btn-primary" type="submit" value="Send" name="Send">
+                    <input class="btn btn-primary btn-sm btn-secondary" type="reset" value="Reset" name="Reset">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

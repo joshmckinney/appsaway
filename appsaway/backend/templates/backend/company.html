@@ -1,0 +1,62 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    <div style="margin: 25px;">
+        <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <div class="card text-white bg-dark card-body">
+                    <h1>Company:</h1>
+                    <div class="d-flex flex-row justify-content-around flex-wrap border" style="margin-top: 20px;">
+                        <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; ">
+                            <strong><u>ID</u></strong>
+                            {{ company.company_id }}
+                        </div>
+                        <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; text-align: center;">
+                            <strong><u>Company</u></strong>
+                            {{ company.company_name }}
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                        <strong>Number of Applications:</strong>
+                        &ensp;{{ application_count }}
+                    </div>
+                    <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                        <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                            <strong>Contact:</strong>
+                            &ensp;{{ company.contact_name }}
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center flex-wrap">
+                        <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                            <strong>Phone:</strong>
+                            &ensp;{{ company.contact_phone }}
+                        </div>
+                        <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                            <strong>Email:</strong>
+                            &ensp;{{ company.contact_email }}
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                        <div class="d-inline-flex flex-row flex-nowrap" style="margin: 5px;">
+                            <strong>Notes:</strong>
+                            &ensp;{{ company.notes }}
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
+                        <a class="btn btn-primary btn-sm btn-secondary" style="margin: 5px;" href="{% url 'companylist' %}">Back to Companies</a>
+                        <a class="btn btn-primary btn-sm btn-warning" style="margin: 5px;" href="{% url 'editcompany' company.pk %}">Edit</a>
+                        <script>
+                            function deleteCompany() {
+                                var companyDelete = confirm("Are you sure you want to delete {{ company.company_name }} and all associated applications?")
+                                if(companyDelete == true) {
+                                    window.open('{% url 'deletecompany' company.pk %}', '_self')
+                                    return true;
+                                }
+                            }
+                        </script>
+                        <a class="btn btn-primary btn-sm btn-danger" style="margin: 5px;" href="javascript: deleteCompany()">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

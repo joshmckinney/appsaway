@@ -1,0 +1,27 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    <div style="margin: 25px; text-align: center">
+        <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <h1>Login</h1>
+                <div class="card text-white bg-dark card-body">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        {{ form.username.label }}:</br>
+                        {{ form.username }} </br>
+                        {{ form.password.label }}:</br>
+                        {{ form.password }} </br></br>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        {% endif %}
+                        <input class="btn btn-primary btn-sm btn-primary" type="submit" value="Login" name="Login">
+                    </form>
+                </div><br>
+                <a href="{% url 'faq' %}#forgot">Forgot Password</a><br>
+                No account? <a href="{% url 'register' %}">Register</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    {% url 'createcompany' as createcompany %}
+    <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px;">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div style="text-align: center;">
+                    <h1>Companies</h1>
+                    <div>
+                        <a class="btn btn-primary btn-sm btn-primary" href="{{ createcompany }}">Create Company</a>
+                        Total: {{ company_count }}
+                    </div>
+                    <br>
+                </div>
+                <div class="card text-white bg-dark card-body">
+                    <form method="get">
+                        <div class="d-flex flex-row justify-content-center flex-wrap">
+                            <div class="d-inline-flex flex-row justify-content-center flex-wrap">
+                                <div style="margin: 5px;">{{ companyFilter.form.company_name }}</div>
+                                <div style="margin: 5px;">{{ companyFilter.form.company_notes }}</div>
+                            </div>
+                            <div class="d-inline-flex flex-row justify-content-center flex-wrap">
+                                <div style="margin: 5px;">{{ companyFilter.form.contact_name }}</div>
+                                <div style="margin: 5px;">{{ companyFilter.form.contact_phone }}</div>
+                                <div style="margin: 5px;">{{ companyFilter.form.contact_email }}</div>
+                            </div>
+                            <div class="d-inline-flex flex-row justify-content-end">
+                                <div style="margin: 5px;"><a class="btn btn-primary btn-sm btn-secondary" href="{% url 'companylist' %}">Reset</a></div>
+                                <div style="margin: 5px;"><button class="btn btn-primary btn-sm btn-primary" type="submit">Search</button></div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-sm" style="margin-top: 25px; text-align: center;">
+                        {% if companies %}
+                            <tr>
+                                <th>Company</th>
+                                <th>Contact</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Notes</th>
+                                <th>View</th>
+                            </tr>
+                            {% for company in companies %}
+                            <tr>
+                                <td>{{ company.company_name }}</td>
+                                <td>{{ company.contact_name }}</td>
+                                <td>{{ company.contact_phone }}</td>
+                                <td>{{ company.contact_email }}</td>
+                                <td>{{ company.company_notes }}</td>
+                                <td><a class="btn btn-primary btn-sm btn-primary" href="{% url 'company' company.pk %}">View</a></td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <th>No Companies</th>
+                            </tr>
+                        {% endif %}
+                        </table>
+                    </div>
+                    {% if companies.has_other_pages %}
+                        <ul class="pagination">
+                        {% if companies.has_previous %}
+                          <li><a href="?page={{ companies.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in companies.paginator.page_range %}
+                          {% if companies.number == i %}
+                            <li class="active"><span>{{ i }}<span class="sr-only">(current)</span></span></li>
+                          {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                        {% if companies.has_next %}
+                          <li><a href="?page={{ companies.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

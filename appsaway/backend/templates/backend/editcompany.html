@@ -1,0 +1,63 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    {% if messages %}
+       <script>
+        {% for message in messages %}
+            alert("{{ message }}");
+            location.href='{% url 'company' company.pk %}'
+        {% endfor %}
+       </script>
+    {% endif %}
+    <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px;">
+        <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <h1 style="text-align: center">Edit Company</h1>
+                <div class="card text-white bg-dark card-body">
+                    <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="responsive-table">
+                        <table class="table table-dark table-sm">
+                            <h4>Company Info</h4>
+                            <tr>
+                                <th>{{ form.company_name.label }}:</th>
+                                <td>{{ form.company_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.company_notes.label }}:</th>
+                                <td>{{ form.company_notes }}</td>
+                            </tr>
+                        </table>
+                        <table class="table table-dark table-sm">
+                            <h4>Contact Info</h4>
+                            <tr>
+                                <tr>
+                                <th>{{ form.contact_name.label }}:</th>
+                                <td>{{ form.contact_name }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.contact_email.label }}:</th>
+                                <td>{{ form.contact_email }}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ form.contact_phone.label }}:</th>
+                                <td>{{ form.contact_phone }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <input type="number" name="user" value="{{ user.pk }}" hidden>
+                    <div style="display: flex; flex-direction: row; justify-content: space-evenly">
+                        <input class="btn btn-primary btn-sm btn-primary" type="submit" value="Update" name="Update">
+                        <a class="btn btn-primary btn-sm btn-secondary" href="javascript:goBack()">Cancel</a>
+                    </div>
+                    </form>
+                    </br>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

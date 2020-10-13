@@ -1,0 +1,21 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+{% url 'home' as home %}
+{% url 'login' as login %}
+    <div id="content" style="text-align: center; overflow: auto; padding-bottom: 50px;">
+        <img src="static/favicon/favicon.png"></br>
+        <h1>AppsAway</h1>
+        <h3><em>A Job Application Tracker</em></h3>
+        <p>The best way to keep track of your job applications and make sure to follow up!</br>Get started below.</p>
+
+        {% if user.is_authenticated %}
+            <form action="{{ home }}">
+                <input class="btn btn-primary btn-sm btn-primary" type="submit" value="Back to Dashboard">
+            </form>
+        {% else %}
+            <form action="{{ login }}">
+                <input class="btn btn-primary btn-sm btn-primary" type="submit" value="Login">
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

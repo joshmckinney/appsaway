@@ -1,0 +1,173 @@
+{% extends 'appsaway/main.html' %}
+{% block content %}
+    {% if messages %}
+       <script>
+        {% for message in messages %}
+            alert("{{ message }}");
+            location.href='{% url 'applist' %}'
+        {% endfor %}
+       </script>
+    {% endif %}
+    <script>
+        function showContract() {
+            var p = document.getElementById("permanent");
+            var c = document.getElementById("contract");
+            var f = document.getElementById("freelance");
+            if (c.style.display === "none") {
+                c.style.display = "block";
+            }
+            f.style.display = "none"
+            p.style.display = "none"
+            document.getElementById("freelance").reset();
+            document.getElementById("permanent").reset();
+            document.getElementById("contract_button").classList.add('active');
+            document.getElementById("freelance_button").classList.remove('active');
+            document.getElementById("permanent_button").classList.remove('active');
+        }
+        function showFreelance() {
+            var p = document.getElementById("permanent");
+            var c = document.getElementById("contract");
+            var f = document.getElementById("freelance");
+            if (f.style.display === "none") {
+                f.style.display = "block";
+            }
+            c.style.display = "none"
+            p.style.display = "none"
+            document.getElementById("contract").reset();
+            document.getElementById("permanent").reset();
+            document.getElementById("contract_button").classList.remove('active');
+            document.getElementById("freelance_button").classList.add('active');
+            document.getElementById("permanent_button").classList.remove('active');
+        }
+        function showPermanent() {
+            var p = document.getElementById("permanent");
+            var c = document.getElementById("contract");
+            var f = document.getElementById("freelance");
+            if (p.style.display === "none") {
+                p.style.display = "block";
+            }
+            c.style.display = "none"
+            f.style.display = "none"
+            document.getElementById("contract").reset();
+            document.getElementById("freelance").reset();
+            document.getElementById("contract_button").classList.remove('active');
+            document.getElementById("freelance_button").classList.remove('active');
+            document.getElementById("permanent_button").classList.add('active');
+        }
+    </script>
+    <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px;">
+        <div class="row justify-content-center">
+            <div class="col-md-auto">
+                <h1>Create Application</h1>
+                <div class="card text-white bg-dark card-body">
+                    <div id="appchoice" style="display: flex; flex-direction: row; justify-content: space-evenly">
+                        <a id="contract_button" class="btn btn-primary btn-sm btn-primary" href="javascript:showContract()">Contract</a>
+                        <a id="freelance_button" class="btn btn-primary btn-sm btn-primary" href="javascript:showFreelance()">Freelance</a>
+                        <a id="permanent_button" class="btn btn-primary btn-sm btn-primary" href="javascript:showPermanent()">Permanent</a>
+                    </div>
+                    <form id="contract" style="display: none;" method="POST" action="">
+                    {% csrf_token %}
+                    <br>
+                    <div class="d-flex flex-row justify-content-center flex-wrap">
+                        <div style="margin: 5px;">{{ contract_form.company }}</div>
+                        <div style="margin: 5px;">{{ contract_form.status }}</div>
+                    </div><br>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-sm">
+                            <tr>
+                                <td>{{ contract_form.app_job_title }}</td>
+                                <td>{{ contract_form.app_notes }}</td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>Contract Start:<br><input type="date" id="datepicker" name="contract_start" required></td>
+                                <td>Contract End:<br><input type="date" id="datepicker" name="contract_end" required></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>App Date:<br><input type="date" id="datepicker" name="app_date" required></td>
+                                <td>Follow-up Date:<br><input type="date" id="datepicker" name="followup_date"></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td colspan="2">Interview Date:<br><input type="date" id="datepicker" name="interview_date"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="d-flex flex-row justify-content-center flex-nowrap">
+                        <input type="number" name="user" value="{{ user.pk }}" hidden>
+                        <input style="margin-right: 5px;" class="btn btn-primary btn-sm btn-primary" type="submit" value="Create" name="Create">
+                        <a style="margin-left: 5px;" class="btn btn-primary btn-sm btn-secondary" href="javascript:goBack()">Cancel</a>
+                    </div>
+                    </form>
+                    <form id="freelance" style="display: none;" method="POST" action="">
+                    {% csrf_token %}
+                    <br>
+                    <div class="d-flex flex-row justify-content-center flex-wrap">
+                        <div style="margin: 5px;">{{ freelance_form.company }}</div>
+                        <div style="margin: 5px;">{{ freelance_form.status }}</div>
+                    </div><br>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-sm" style="text-align: center">
+                            <tr>
+                                <td>{{ freelance_form.app_job_title }}</td>
+                                <td>{{ freelance_form.app_notes }}</td>
+                            </tr>
+                            <tr>
+                                <td>Job Details:<br>{{ freelance_form.freelance_details }}</td>
+                                <td>Bid Amount:<br>{{ freelance_form.freelance_bid }}</td>
+                            </tr>
+                            <tr>
+                                <td>App Date:<br><input type="date" id="datepicker" name="app_date" required></td>
+                                <td>Follow-up Date<br><input type="date" id="datepicker" name="followup_date"></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td colspan="2">Interview Date:<br><input type="date" id="datepicker" name="interview_date"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="d-flex flex-row justify-content-center flex-nowrap">
+                        <input type="number" name="user" value="{{ user.pk }}" hidden>
+                        <input style="margin-right: 5px;" class="btn btn-primary btn-sm btn-primary" type="submit" value="Create" name="Create">
+                        <a style="margin-left: 5px;" class="btn btn-primary btn-sm btn-secondary" href="javascript:goBack()">Cancel</a>
+                    </div>
+                    </form>
+                    <form id="permanent" style="display: none;" method="POST" action="">
+                    {% csrf_token %}
+                    <br>
+                    <div class="d-flex flex-row justify-content-center flex-wrap">
+                        <div style="margin: 5px;">{{ permanent_form.company }}</div>
+                        <div style="margin: 5px;">{{ permanent_form.status }}</div>
+                    </div><br>
+                    <div class="table-responsive">
+                        <table class="table table-dark table-sm">
+                            <tr>
+                                <td>{{ permanent_form.app_job_title }}</td>
+                                <td>{{ permanent_form.app_notes }}</td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>App Date:<br><input type="date" id="datepicker" name="app_date" required></td>
+                                <td>Follow-up Date:<br><input type="date" id="datepicker" name="followup_date"></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td colspan="2">Interview Date:<br><input type="date" id="datepicker" name="interview_date"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="d-flex flex-row justify-content-center flex-nowrap">
+                        <input type="number" name="user" value="{{ user.pk }}" hidden>
+                        <input style="margin-right: 5px;" class="btn btn-primary btn-sm btn-primary" type="submit" value="Create" name="Create">
+                        <a style="margin-left: 5px;" class="btn btn-primary btn-sm btn-secondary" href="javascript:goBack()">Cancel</a>
+                    </div>
+                    </form>
+                    <br>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
