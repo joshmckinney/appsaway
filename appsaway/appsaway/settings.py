@@ -25,6 +25,7 @@ SECRET_KEY = 'v62$r068mjvl8ugap%lukq3j#5l!%49o!^ei7_bck=w=qx-v!w'
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
 
 # Set Session Timeout Settings
 SESSION_EXPIRE_SECONDS = 1800  # 30 minute timeout
