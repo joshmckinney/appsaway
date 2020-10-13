@@ -354,7 +354,7 @@ def company(request, pk):
 @login_required
 def companylist(request):
     idnum = request.user.pk
-    companies_list = Company.objects.filter(user=idnum).order_by('-company_name')
+    companies_list = Company.objects.filter(user=idnum).order_by('-company_id')
     company_count = companies_list.count()
     companyFilter = CompanyFilter(request.GET, queryset=companies_list)
     companies_list = companyFilter.qs
