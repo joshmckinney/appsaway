@@ -11,8 +11,15 @@
     <script>
     function showPassword() {
       var x = document.getElementById("password_update");
+      var y = document.getElementById("profile");
       if (x.style.display === "none") {
         x.style.display = "block";
+        y.style.display = "none";
+        y.reset();
+      } else {
+          x.style.display = "none";
+          y.style.display = "block";
+          x.reset();
       }
     }
     function showDeleteUser() {
@@ -36,14 +43,21 @@
             return true;
         }
     }
+    function changePassword() {
+        var passwordChange = confirm("Are you sure you want to change your password? You will be logged out.")
+        if(passwordChange == true) {
+            document.getElementById("password_update").submit()
+            return true;
+        }
+    }
     </script>
     <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px;">
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="card text-white bg-dark card-body">
-                    <form method="post">
+                    <h1>Edit User Profile</h1>
+                    <form id="profile" method="post">
                         {% csrf_token %}
-                        <h1>Edit User Profile</h1>
                         <div class="table-responsive">
                             <table class="table table-dark table-sm">
                                 <tr>
@@ -66,8 +80,6 @@
                         {% csrf_token %}
                         <div class="table-responsive">
                             <table class="table table-dark table-sm">
-                                <br>
-                                <p>Change Password:</p>
                                 <tr>
                                     <th>{{ password_form.password1.label }}</th>
                                     <td>{{ password_form.password1 }}</td>
@@ -79,7 +91,9 @@
                             </table>
                         </div>
                         <div style="display: flex; flex-direction: row; justify-content: center">
-                            <input class="btn btn-primary btn-sm btn-danger" type="submit" value="Update" name="Change Password">
+                            <a class="btn btn-primary btn-sm btn-primary" href="javascript:changePassword()">Update</a>
+                            <a class="btn btn-primary btn-sm btn-warning" style="margin-left:5px" href="javascript:showPassword()">Edit Profile</a>
+                            <a class="btn btn-primary btn-sm btn-secondary" style="margin-left:5px" href="javascript:goBack()">Cancel</a>
                         </div>
                     </form>
                     </br>
