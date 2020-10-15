@@ -21,7 +21,12 @@
                             </tr>
                             <tr>
                                 <th>Joined:</th>
-                                <td>{{ user.date_joined }}</td>
+                                <td>
+                                    <script>
+                                        var date = new Date('{{ user.date_joined.isoformat }}')
+                                        document.write(date.toDateString());
+                                    </script>
+                                </td>
                             </tr>
                         </table>
                     </div>
