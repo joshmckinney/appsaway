@@ -1,10 +1,14 @@
 {% extends 'appsaway/main.html' %}
 {% block content %}
-    <div style="margin: 25px;">
-        <div class="row justify-content-center" style="padding-bottom: 50px;">
+    <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px;">
+        <div class="row justify-content-center">
             <div class="col-md-auto">
                 <div class="card text-white bg-dark card-body" style="padding-bottom: 20px;">
                     <h1>Application:</h1>
+                        <script>
+                            var date = new Date('{{ application.last_updated.isoformat }}')
+                            document.write("Last Updated: " + date.toLocaleString());
+                        </script>
                         {% if app_type == 'Contract' %}
                             <div class="d-flex flex-row justify-content-around flex-wrap border" style="margin-top: 20px;">
                                 <div class="d-inline-flex flex-column flex-nowrap" style="margin: 5px; ">
