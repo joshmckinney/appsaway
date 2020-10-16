@@ -17,10 +17,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('home/', views.home, name='home'),  # Dashboard
+    path('dashboard/', views.home, name='home'),  # Dashboard
     path('profile/', views.profile, name='profile'),  # User profile
     path('profile/edit', views.editprofile, name='editprofile'),  # Edit user profile
-    path('profile/delete?confirm=true', views.deleteprofile, name='deleteprofile'),  # Delete user profile
+    path('profile/delete', views.deleteprofile, name='deleteprofile'),  # Delete user profile
     path('app/<int:pk>', views.app, name='app'),  # App by id
     path('app/list', views.applist, name='applist'),  # App list
     path('app/create', views.createapp, name='createapp'),  # Create app
