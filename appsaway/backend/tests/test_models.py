@@ -2,19 +2,18 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 import datetime
 
-from .models import Company, ContractApplication, FreelanceApplication, PermanentApplication
-# Create your tests here.
+from backend.models import Company, ContractApplication, FreelanceApplication, PermanentApplication
 
 
 # Test Company Model
 class CompanyModelTestCase(TestCase):
     def setUp(self):
         User.objects.create_user(username="Test User")
-        self.user_id = User.objects.get(username="Test User").pk
+        self.user = User.objects.get(username="Test User")
 
     def test_create_company(self):
         self.company = Company.objects.create(
-            user_id=self.user_id,
+            user=self.user,
             company_name="Test Company",
             company_notes="This is a note",
             contact_name="Test Contact",
@@ -31,7 +30,7 @@ class AppModelTestCase(TestCase):
         cls.user = User.objects.create_user(username="Test User")
 
     def setUp(self):
-        Company.objects.create(
+        self.company = Company.objects.create(
             user=self.user,
             company_name="Test Company",
             company_notes="This is a note",
@@ -39,12 +38,11 @@ class AppModelTestCase(TestCase):
             contact_phone="(555) 123-4567",
             contact_email="test@testcompany.com"
         )
-        self.company_id = Company.objects.get(company_id=1)
 
     def test_create_contract_app(self):
         ContractApplication.objects.create(
             user=self.user,
-            company=self.company_id,
+            company=self.company,
             app_job_title="Test Contract",
             app_date=datetime.date.today(),
             followup_date=datetime.date.today(),
@@ -59,7 +57,7 @@ class AppModelTestCase(TestCase):
     def test_create_freelance_app(self):
         FreelanceApplication.objects.create(
             user=self.user,
-            company=self.company_id,
+            company=self.company,
             app_job_title="Test Freelance",
             app_date=datetime.date.today(),
             followup_date=datetime.date.today(),
@@ -74,7 +72,7 @@ class AppModelTestCase(TestCase):
     def test_create_permanent_app(self):
         PermanentApplication.objects.create(
             user=self.user,
-            company=self.company_id,
+            company=self.company,
             app_job_title="Test Freelance",
             app_date=datetime.date.today(),
             followup_date=datetime.date.today(),
