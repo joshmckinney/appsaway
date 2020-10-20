@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import environ
 import dj_database_url
 import django_heroku
 
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v62$r068mjvl8ugap%lukq3j#5l!%49o!^ei7_bck=w=qx-v!w'
+SECRET_KEY = env('SECRET_KEY')
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
