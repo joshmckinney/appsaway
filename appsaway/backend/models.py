@@ -32,7 +32,7 @@ class Application(PolymorphicModel):
         auto_now=False, auto_now_add=False, null=True, blank=True, verbose_name='Follow-up Date'
     )
     last_updated = models.DateTimeField(auto_now_add=True, verbose_name='Last Updated')
-    app_notes = models.CharField(max_length=200, null=True, verbose_name='Notes')
+    app_notes = models.CharField(max_length=200, null=True, blank=True, verbose_name='Notes')
     status = models.CharField(max_length=20, verbose_name='Status', choices=[
         ('In Progress', 'In Progress'),
         ('Submitted', 'Submitted'),
