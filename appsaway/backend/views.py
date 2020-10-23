@@ -15,7 +15,7 @@ from . import forms
 @login_required
 def home(request):
     idnum = request.user.pk
-    applications = Application.objects.filter(user=idnum).order_by('-app_date')
+    applications = Application.objects.filter(user=idnum).order_by('-app_date', '-app_id')
     last_5 = applications[:5]
     companies = Company.objects.filter(user=idnum)
     application_count = applications.count()
@@ -103,10 +103,10 @@ def app(request, pk):
 @login_required
 def applist(request):
     idnum = request.user.pk
-    applications_list = Application.objects.filter(user=idnum).order_by('-app_date')
-    contract_list = ContractApplication.objects.filter(user=idnum).order_by('-app_date')
-    freelance_list = FreelanceApplication.objects.filter(user=idnum).order_by('-app_date')
-    permanent_list = PermanentApplication.objects.filter(user=idnum).order_by('-app_date')
+    applications_list = Application.objects.filter(user=idnum).order_by('-app_date', '-app_id')
+    contract_list = ContractApplication.objects.filter(user=idnum).order_by('-app_date', '-app_id')
+    freelance_list = FreelanceApplication.objects.filter(user=idnum).order_by('-app_date', '-app_id')
+    permanent_list = PermanentApplication.objects.filter(user=idnum).order_by('-app_date', '-app_id')
     application_count = applications_list.count()
     app_type = 'all'
     status_choices = (
@@ -354,7 +354,7 @@ def company(request, pk):
 @login_required
 def companylist(request):
     idnum = request.user.pk
-    companies_list = Company.objects.filter(user=idnum).order_by('-company_id')
+    companies_list = Company.objects.filter(user=idnum).order_by('company_name')
     company_count = companies_list.count()
     companyFilter = CompanyFilter(request.GET, queryset=companies_list)
     companies_list = companyFilter.qs
