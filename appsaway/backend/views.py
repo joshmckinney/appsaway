@@ -319,14 +319,6 @@ def editapp(request, pk):
                 return render(request, 'backend/editapp.html', context)
         if app_type == 'permanent':
             form = forms.PermanentApplication(request.POST, instance=application)
-            followup_date = form.data['followup_date']
-            interview_date = form.data['interview_date']
-            if not form.data['followup_date']:
-                followup_date = None
-                return followup_date
-            if not form.data['interview_date']:
-                interview_date = None
-                return interview_date
             if form.is_valid():
                 form.save()
                 messages.success(request, 'Application updated!')
