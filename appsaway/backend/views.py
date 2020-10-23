@@ -319,8 +319,8 @@ def editapp(request, pk):
                 return render(request, 'backend/editapp.html', context)
         if app_type == 'permanent':
             form = forms.PermanentApplication(request.POST, instance=application)
-            followup_date = form.fields['followup_date']
-            interview_date = form.fields['interview_date']
+            followup_date = form.data['followup_date']
+            interview_date = form.data['interview_date']
             if not form.data['followup_date']:
                 followup_date = None
                 return followup_date
