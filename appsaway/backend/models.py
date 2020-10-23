@@ -7,10 +7,10 @@ from polymorphic.models import PolymorphicModel
 class Company(models.Model):
     company_id = models.AutoField(primary_key=True)
     company_name = models.CharField(max_length=200, null=False)
-    company_notes = models.CharField(max_length=200, null=True)
-    contact_name = models.CharField(max_length=200, null=True)
-    contact_email = models.CharField(max_length=100, null=True)
-    contact_phone = models.CharField(max_length=20, null=True)
+    company_notes = models.CharField(max_length=200, null=True, blank=True)
+    contact_name = models.CharField(max_length=200, null=True, blank=True)
+    contact_email = models.CharField(max_length=100, null=True, blank=True)
+    contact_phone = models.CharField(max_length=20, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
