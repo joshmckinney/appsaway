@@ -27,9 +27,9 @@ class Application(PolymorphicModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     app_job_title = models.CharField(max_length=200, null=False, verbose_name='Job Title')
     app_date = models.DateField(auto_now=False, auto_now_add=False, null=False, verbose_name='App Date')
-    interview_date = models.DateField(auto_now=False, auto_now_add=False, null=True, verbose_name='Interview Date')
+    interview_date = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True, verbose_name='Interview Date')
     followup_date = models.DateField(
-        auto_now=False, auto_now_add=False, null=True, verbose_name='Follow-up Date'
+        auto_now=False, auto_now_add=False, null=True, blank=True, verbose_name='Follow-up Date'
     )
     last_updated = models.DateTimeField(auto_now_add=True, verbose_name='Last Updated')
     app_notes = models.CharField(max_length=200, null=True, verbose_name='Notes')
