@@ -266,6 +266,8 @@ def editapp(request, pk):
         contract_form.fields['company'].empty_label = 'Select Company:'
         contract_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
         contract_form.fields['status'].empty_label = 'Status:'
+        contract_form.fields['followup_date'] = forms.DateField(required=False)
+        contract_form.fields['interview_date'] = forms.DateField(required=False)
     except ObjectDoesNotExist:
         pass
 
@@ -278,6 +280,8 @@ def editapp(request, pk):
         freelance_form.fields['company'].empty_label = 'Select Company:'
         freelance_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
         freelance_form.fields['status'].empty_label = 'Status:'
+        freelance_form.fields['followup_date'] = forms.DateField(required=False)
+        freelance_form.fields['interview_date'] = forms.DateField(required=False)
     except ObjectDoesNotExist:
         pass
 
@@ -290,6 +294,8 @@ def editapp(request, pk):
         permanent_form.fields['company'].empty_label = 'Select Company:'
         permanent_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
         permanent_form.fields['status'].empty_label = 'Status:'
+        permanent_form.fields['followup_date'] = forms.DateField(required=False)
+        permanent_form.fields['interview_date'] = forms.DateField(required=False)
     except ObjectDoesNotExist:
         pass
 
