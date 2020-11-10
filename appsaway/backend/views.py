@@ -124,28 +124,28 @@ def applist(request):
         app_after = request.GET.get('app_after')
         if request.GET.get('app_type') == 'contract_type':
             contract_filter.form.fields['company'] = forms.ModelChoiceField(
-                Company.objects.filter(user=idnum), required=False)
+                Company.objects.filter(user=idnum).order_by('company_name'), required=False)
             contract_filter.form.fields['company'].empty_label = 'Select Company:'
             contract_filter.form.fields['status'] = ChoiceField(choices=status_choices, required=False)
             app_type = 'contract'
             applications_list = contract_filter.qs
         elif request.GET.get('app_type') == 'freelance_type':
             freelance_filter.form.fields['company'] = forms.ModelChoiceField(
-                Company.objects.filter(user=idnum), required=False)
+                Company.objects.filter(user=idnum).order_by('company_name'), required=False)
             freelance_filter.form.fields['company'].empty_label = 'Select Company:'
             freelance_filter.form.fields['status'] = ChoiceField(choices=status_choices, required=False)
             app_type = 'freelance'
             applications_list = freelance_filter.qs
         elif request.GET.get('app_type') == 'permanent_type':
             permanent_filter.form.fields['company'] = forms.ModelChoiceField(
-                Company.objects.filter(user=idnum), required=False)
+                Company.objects.filter(user=idnum).order_by('company_name'), required=False)
             permanent_filter.form.fields['company'].empty_label = 'Select Company:'
             permanent_filter.form.fields['status'] = ChoiceField(choices=status_choices, required=False)
             app_type = 'permanent'
             applications_list = permanent_filter.qs
         else:
             app_filter.form.fields['company'] = forms.ModelChoiceField(
-                Company.objects.filter(user=idnum), required=False)
+                Company.objects.filter(user=idnum).order_by('company_name'), required=False)
             app_filter.form.fields['company'].empty_label = 'Select Company:'
             app_filter.form.fields['status'] = ChoiceField(choices=status_choices, required=False)
             app_type = 'all'
