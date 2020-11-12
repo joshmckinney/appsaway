@@ -173,6 +173,7 @@ def applist(request):
 
 @login_required
 def createapp(request):
+    idnum = request.user.pk
     user = request.user
     app_success = "Application created!"
     companies = Company.objects.filter(user=user.pk)
@@ -186,19 +187,22 @@ def createapp(request):
         ('Rejected', 'Rejected'))
 
     contract_form = forms.ContractApplication()
-    contract_form.fields['company'] = forms.ModelChoiceField(Company.objects.filter(user=request.user))
+    contract_form.fields['company'] = forms.ModelChoiceField(
+        Company.objects.filter(user=idnum).order_by('company_name'), required=False)
     contract_form.fields['company'].empty_label = 'Select Company:'
     contract_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
     contract_form.fields['status'].empty_label = 'Status:'
 
     freelance_form = forms.FreelanceApplication()
-    freelance_form.fields['company'] = forms.ModelChoiceField(Company.objects.filter(user=request.user))
+    freelance_form.fields['company'] = forms.ModelChoiceField(
+        Company.objects.filter(user=idnum).order_by('company_name'), required=False)
     freelance_form.fields['company'].empty_label = 'Select Company:'
     freelance_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
     freelance_form.fields['status'].empty_label = 'Status:'
 
     permanent_form = forms.PermanentApplication()
-    permanent_form.fields['company'] = forms.ModelChoiceField(Company.objects.filter(user=request.user))
+    permanent_form.fields['company'] = forms.ModelChoiceField(
+        Company.objects.filter(user=idnum).order_by('company_name'), required=False)
     permanent_form.fields['company'].empty_label = 'Select Company:'
     permanent_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
     permanent_form.fields['status'].empty_label = 'Status:'
@@ -246,6 +250,7 @@ def createapp(request):
 
 @login_required
 def editapp(request, pk):
+    idnum = request.user.pk
 
     status_choices = (
         ('', 'Select Status:'),
@@ -262,7 +267,8 @@ def editapp(request, pk):
         form = forms.ContractApplication(instance=application)
         app_type = 'contract'
         contract_form = forms.ContractApplication()
-        contract_form.fields['company'] = forms.ModelChoiceField(Company.objects.filter(user=request.user))
+        contract_form.fields['company'] = forms.ModelChoiceField(
+            Company.objects.filter(user=idnum).order_by('company_name'), required=False)
         contract_form.fields['company'].empty_label = 'Select Company:'
         contract_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
         contract_form.fields['status'].empty_label = 'Status:'
@@ -274,7 +280,8 @@ def editapp(request, pk):
         form = forms.FreelanceApplication(instance=application)
         app_type = 'freelance'
         freelance_form = forms.FreelanceApplication()
-        freelance_form.fields['company'] = forms.ModelChoiceField(Company.objects.filter(user=request.user))
+        freelance_form.fields['company'] = forms.ModelChoiceField(
+            Company.objects.filter(user=idnum).order_by('company_name'), required=False)
         freelance_form.fields['company'].empty_label = 'Select Company:'
         freelance_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
         freelance_form.fields['status'].empty_label = 'Status:'
@@ -286,14 +293,16 @@ def editapp(request, pk):
         form = forms.PermanentApplication(instance=application)
         app_type = 'permanent'
         permanent_form = forms.PermanentApplication()
-        permanent_form.fields['company'] = forms.ModelChoiceField(Company.objects.filter(user=request.user))
+        permanent_form.fields['company'] = forms.ModelChoiceField(
+            Company.objects.filter(user=idnum).order_by('company_name'), required=False)
         permanent_form.fields['company'].empty_label = 'Select Company:'
         permanent_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
         permanent_form.fields['status'].empty_label = 'Status:'
     except ObjectDoesNotExist:
         pass
 
-    form.fields['company'] = forms.ModelChoiceField(Company.objects.filter(user=request.user))
+    form.fields['company'] = forms.ModelChoiceField(
+        Company.objects.filter(user=idnum).order_by('company_name'), required=False)
     context = {'form': form,
                'application': application,
                'app_type': app_type,
