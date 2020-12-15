@@ -159,7 +159,6 @@
                                 <th>Company</th>
                                 <th>App Date</th>
                                 <th>Follow-up Date</th>
-                                <th>Notes</th>
                                 <th>View</th>
                             </tr>
                             {% for application in applications %}
@@ -168,7 +167,6 @@
                                 <td>{{ application.company }}</td>
                                 <td>{{ application.app_date }}</td>
                                 <td>{{ application.followup_date }}</td>
-                                <td>{{ application.app_notes }}</td>
                                 <td><a class="btn btn-primary btn-sm btn-primary" href="{% url 'app' application.pk %}">View</a></td>
                             </tr>
                             {% endfor %}
