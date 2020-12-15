@@ -99,6 +99,7 @@ class Company(ModelForm):
     def __init__(self, *args, **kwargs):
         super(Company, self).__init__(*args, **kwargs)
         self.fields['company_name'].required = True
+        self.fields['company_site'].required = False
         self.fields['company_notes'].required = False
         self.fields['contact_name'].required = False
         self.fields['contact_phone'].required = False
@@ -106,13 +107,16 @@ class Company(ModelForm):
 
     class Meta:
         model = Company
-        fields = ['user', 'company_name', 'company_notes', 'contact_name', 'contact_email', 'contact_phone']
+        fields = ['user', 'company_name', 'company_site', 'company_notes', 'contact_name', 'contact_email', 'contact_phone']
         widgets = {
             'company_name': forms.TextInput(attrs={
                 'placeholder': 'Company Name', 'style': 'width:100%'
             }),
+            'company_site': forms.TextInput(attrs={
+                'placeholder': 'Website', 'style': 'width:100%'
+            }),
             'company_notes': forms.TextInput(attrs={
-                 'placeholder': 'Notes', 'style': 'width:100%'
+                'placeholder': 'Notes', 'style': 'width:100%'
             }),
             'contact_name': forms.TextInput(attrs={
                 'placeholder': 'Contact', 'style': 'width:100%'

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from polymorphic.models import PolymorphicModel
+from unittest.util import _MAX_LENGTH
 
 
 # Company Model
@@ -8,6 +9,7 @@ class Company(models.Model):
     company_id = models.AutoField(primary_key=True)
     company_name = models.CharField(max_length=200, null=False)
     company_notes = models.CharField(max_length=200, null=True, blank=True)
+    company_site = models.URLField(max_length=200, null=True, blank=True)
     contact_name = models.CharField(max_length=200, null=True, blank=True)
     contact_email = models.CharField(max_length=100, null=True, blank=True)
     contact_phone = models.CharField(max_length=20, null=True, blank=True)
@@ -31,7 +33,7 @@ class Application(PolymorphicModel):
     followup_date = models.DateField(
         auto_now=False, auto_now_add=False, null=True, blank=True, verbose_name='Follow-up Date'
     )
-    last_updated = models.DateTimeField(auto_now_add=True, verbose_name='Last Updated')
+    last_updated = models.DateTimeField(auto_now=True, verbose_name='Last Updated')
     app_notes = models.CharField(max_length=200, null=True, blank=True, verbose_name='Notes')
     status = models.CharField(max_length=20, verbose_name='Status', choices=[
         ('In Progress', 'In Progress'),
