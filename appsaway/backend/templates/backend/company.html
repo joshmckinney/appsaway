@@ -18,7 +18,7 @@
                     </div>
                     <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
                         <strong>Website:</strong>
-                        &ensp;<a href="{{ company.company_site }}">{{ company.company_site }}</a>
+                        &ensp;{% if company.company_site %}<a href="{{ company.company_site }}">{{ company.company_site }}</a>{% else %}None{% endif %}
                     </div>
                     <div class="d-flex flex-row justify-content-center flex-wrap" style="margin-top: 20px;">
                         <strong>Number of Applications:</strong>
