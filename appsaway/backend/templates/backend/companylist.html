@@ -42,7 +42,7 @@
                             {% for company in companies %}
                             <tr>
                                 <td>{{ company.company_name }}</td>
-                                <td><a href="{{ company.company_site }}">{{ company.company_site }}</a></td>
+                                <td>{% if company.company_site %}<a href="{{ company.company_site }}">{{ company.company_site }}</a>{% else %}None{% endif %}</td>
                                 <td>{{ company.company_notes }}</td>
                                 <td><a class="btn btn-primary btn-sm btn-primary" href="{% url 'company' company.pk %}">View</a></td>
                             </tr>
