@@ -3,7 +3,7 @@
     {% url 'createcompany' as createcompany %}
     <div id="container" style="margin: 25px 25px 0px 25px; padding-bottom: 50px;">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div style="text-align: center;">
                     <h1>Companies</h1>
                     <div>
@@ -17,12 +17,6 @@
                         <div class="d-flex flex-row justify-content-center flex-wrap">
                             <div class="d-inline-flex flex-row justify-content-center flex-wrap">
                                 <div style="margin: 5px;">{{ companyFilter.form.company_name }}</div>
-                                <div style="margin: 5px;">{{ companyFilter.form.company_notes }}</div>
-                            </div>
-                            <div class="d-inline-flex flex-row justify-content-center flex-wrap">
-                                <div style="margin: 5px;">{{ companyFilter.form.contact_name }}</div>
-                                <div style="margin: 5px;">{{ companyFilter.form.contact_phone }}</div>
-                                <div style="margin: 5px;">{{ companyFilter.form.contact_email }}</div>
                             </div>
                             <div class="d-inline-flex flex-row justify-content-end">
                                 <div style="margin: 5px;"><a class="btn btn-primary btn-sm btn-secondary" href="{% url 'companylist' %}">Reset</a></div>
@@ -42,7 +36,7 @@
                             {% for company in companies %}
                             <tr>
                                 <td>{{ company.company_name }}</td>
-                                <td>{% if company.company_site %}<a href="{{ company.company_site }}">{{ company.company_site }}</a>{% else %}None{% endif %}</td>
+                                 <td>{% if company.company_site %}<a href="{{ company.company_site }}">{{ company.company_site }}</a>{% else %}None{% endif %}</td>
                                 <td>{{ company.company_notes }}</td>
                                 <td><a class="btn btn-primary btn-sm btn-primary" href="{% url 'company' company.pk %}">View</a></td>
                             </tr>
@@ -61,13 +55,20 @@
                         {% else %}
                           <li class="disabled"><span>&laquo;</span></li>
                         {% endif %}
+                        &nbsp
                         {% for i in companies.paginator.page_range %}
                           {% if companies.number == i %}
                             <li class="active"><span>{{ i }}<span class="sr-only">(current)</span></span></li>
                           {% else %}
+                          	{% if not companyFilter.form.company_name.value	 %}
                             <li><a href="?page={{ i }}">{{ i }}</a></li>
+                            {% else %}
+                            <li><a href="?company_name={{ companyFilter.form.company_name.value }}&page={{i}}">{{i}}</a></li>
+                            {% endif %}
                           {% endif %}
+                          {% if i > 0 and i < companies.paginator.num_pages %}&nbsp/&nbsp{% endif %}
                         {% endfor %}
+                        &nbsp
                         {% if companies.has_next %}
                           <li><a href="?page={{ companies.next_page_number }}">&raquo;</a></li>
                         {% else %}
