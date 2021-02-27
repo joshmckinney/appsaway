@@ -93,7 +93,7 @@
                     </div>
                     {% if applications.has_other_pages %}
                     	<nav aria-label="Application page navigaton">
-                        	<ul class="pagination flex-wrap justify-content-center">
+                        	<ul class="pagination bg-dark flex-wrap justify-content-center">
 		                        {% if applications.has_previous %}
 		                        		{% if request.path == request.get_full_path %}
 			                          	<li class="page-link"><a href="?page={{ applications.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>

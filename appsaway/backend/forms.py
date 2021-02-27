@@ -6,6 +6,7 @@ from django import forms
 from .models import Company
 
 from .models import FreelanceApplication, ContractApplication, PermanentApplication
+from itertools import filterfalse
 
 
 class ContractApplication(ModelForm):
@@ -16,6 +17,8 @@ class ContractApplication(ModelForm):
         self.fields['app_notes'].required = False
         self.fields['followup_date'].required = False
         self.fields['interview_date'].required = False
+        self.fields['contract_start'].required = False
+        self.fields['contract_end'].required = False
 
     class Meta:
         model = ContractApplication
@@ -48,6 +51,8 @@ class FreelanceApplication(ModelForm):
         self.fields['app_notes'].required = False
         self.fields['followup_date'].required = False
         self.fields['interview_date'].required = False
+        self.fields['freelance_details'].required = False
+        self.fields['freelance_bid'].required = False
 
     class Meta:
         model = FreelanceApplication

@@ -28,18 +28,20 @@
                                     <td>{{ form.app_notes }}</td>
                                 </tr>
                                 <tr style="text-align: center">
-                                    <td>Contract Start:<br><input type="date" id="datepicker" name="contract_start" required></td>
-                                    <td>Contract End:<br><input type="date" id="datepicker" name="contract_end" required></td>
+                                    <td>Contract Start:<br><input style="width: 100%;" placeholder="Contract Start" onfocusin="(this.type='date')"
+                                    	onfocusout="(this.type='text')" type="text" id="datepicker" name="contract_start" value="{{ application.contract_start|date:"Y-m-d" }}"></td>
+                                    <td>Contract End:<br><input style="width: 100%;" placeholder="Contract End" onfocusin="(this.type='date')"
+                                    	onfocusout="(this.type='text')" type="text" id="datepicker" name="contract_end" value="{{ application.contract_end|date:"Y-m-d" }}"></td>
                                 </tr>
                                 <tr style="text-align: center">
                                     <td>App Date:<br><input style="width: 100%;" placeholder="App Date" onfocusin="(this.type='date')"
-                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="app_date" value="{{ application.app_date }}" required></td>
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="app_date" value="{{ application.app_date|date:"Y-m-d" }}" required></td>
                                     <td>Follow-up Date<br><input style="width: 100%;" placeholder="Follow-up Date" onfocusin="(this.type='date')"
-                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="followup_date" value="{{ application.followup_date }}"></td>
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="followup_date" value="{{ application.followup_date|date:"Y-m-d" }}"></td>
                                 </tr>
                                 <tr style="text-align: center">
                                     <td colspan="2">Interview Date:<br><input style="width: 50%;" placeholder="Interview Date" onfocusin="(this.type='date')"
-                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="interview_date" value="{{ application.interview_date }}"></td>
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="interview_date" value="{{ application.interview_date|date:"Y-m-d" }}"></td>
                                 </tr>
                             </table>
                         </div>
@@ -71,13 +73,13 @@
                                 </tr>
                                 <tr style="text-align: center">
                                     <td>App Date:<br><input style="width: 100%;" placeholder="App Date" onfocusin="(this.type='date')"
-                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="app_date" value="{{ application.app_date }}" required></td>
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="app_date" value="{{ application.app_date|date:"Y-m-d" }}" required></td>
                                     <td>Follow-up Date<br><input style="width: 100%;" placeholder="Follow-up Date" onfocusin="(this.type='date')"
-                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="followup_date" value="{{ application.followup_date }}"></td>
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="followup_date" value="{{ application.followup_date|date:"Y-m-d" }}"></td>
                                 </tr>
                                 <tr style="text-align: center">
                                     <td colspan="2">Interview Date:<br><input style="width: 50%;" placeholder="Interview Date" onfocusin="(this.type='date')"
-                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="interview_date" value="{{ application.interview_date }}"></td>
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="interview_date" value="{{ application.interview_date|date:"Y-m-d" }}"></td>
                                 </tr>
                             </table>
                         </div>
@@ -107,11 +109,11 @@
                                     <td>App Date:<br><input style="width: 100%;" placeholder="App Date" onfocusin="(this.type='date')"
                                                onfocusout="(this.type='text')" type="text" id="datepicker" name="app_date" value="{{ application.app_date|date:"Y-m-d" }}" required></td>
                                     <td>Follow-up Date:<br><input style="width: 100%;" placeholder="Follow-up Date" onfocusin="(this.type='date')"
-                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="followup_date" value="{% if application.followup_date %}{{ application.followup_date }}{% endif %}"></td>
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="followup_date" value="{% if application.followup_date %}{{ application.followup_date|date:"Y-m-d" }}{% endif %}"></td>
                                 </tr>
                                 <tr style="text-align: center">
                                     <td colspan="2">Interview Date:<br><input style="width: 50%;" placeholder="Interview Date" onfocusin="(this.type='date')"
-                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="interview_date" value="{% if application.interview_date %}{{ application.interview_date }}{% endif %}"></td>
+                                               onfocusout="(this.type='text')" type="text" id="datepicker" name="interview_date" value="{% if application.interview_date %}{{ application.interview_date|date:"Y-m-d" }}{% endif %}"></td>
                                 </tr>
                             </table>
                         </div>

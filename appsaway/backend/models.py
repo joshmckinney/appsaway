@@ -50,8 +50,8 @@ class Application(PolymorphicModel):
 
 # Contract Application Model
 class ContractApplication(Application):
-    contract_start = models.DateField(auto_now=False, auto_now_add=False, null=False, verbose_name='Contract Start')
-    contract_end = models.DateField(auto_now=False, auto_now_add=False, null=False, verbose_name='Contract End')
+    contract_start = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True, verbose_name='Contract Start')
+    contract_end = models.DateField(auto_now=False, auto_now_add=False, null=True, blank=True, verbose_name='Contract End')
 
 
 # Permanent Application Model
@@ -61,5 +61,5 @@ class PermanentApplication(Application):
 
 # Freelance Application Model
 class FreelanceApplication(Application):
-    freelance_details = models.CharField(max_length=200, null=False, verbose_name='Job Details')
-    freelance_bid = models.FloatField(null=False, verbose_name='Bid Amount')
+    freelance_details = models.CharField(max_length=200, null=True, blank=True, verbose_name='Job Details')
+    freelance_bid = models.FloatField(null=True, blank=True, verbose_name='Bid Amount')
