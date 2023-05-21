@@ -85,8 +85,9 @@ def deleteprofile(request):
 
 @login_required
 def app(request, pk):
+    idnum = request.user.pk
     try:
-        application = Application.objects.get(app_id=pk)
+        application = Application.objects.get(user=idnum,app_id=pk)
         if isinstance(application, ContractApplication):
             app_type = 'Contract'
         elif isinstance(application, FreelanceApplication):
@@ -96,7 +97,7 @@ def app(request, pk):
         context = {'application': application, 'app_type': app_type, 'user': request.user}
     except ObjectDoesNotExist:
         return render(request, 'backend/error.html',
-                      context={'message': "Exception: Application with id " + str(pk) + " not found!"})
+                      context={'message': "Exception: Application not found or you don't have permission to view!"})
     return render(request, 'backend/app.html', context)
 
 
@@ -263,7 +264,7 @@ def editapp(request, pk):
     application = None
 
     try:
-        application = ContractApplication.objects.get(app_id=pk)
+        application = ContractApplication.objects.get(user=idnum,app_id=pk)
         form = forms.ContractApplication(instance=application)
         app_type = 'contract'
         contract_form = forms.ContractApplication()
@@ -273,10 +274,11 @@ def editapp(request, pk):
         contract_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
         contract_form.fields['status'].empty_label = 'Status:'
     except ObjectDoesNotExist:
-        pass
+        return render(request, 'backend/error.html',
+                      context={'message': "Exception: Application not found or you don't have permission to view!"})
 
     try:
-        application = FreelanceApplication.objects.get(app_id=pk)
+        application = FreelanceApplication.objects.get(user=idnum, app_id=pk)
         form = forms.FreelanceApplication(instance=application)
         app_type = 'freelance'
         freelance_form = forms.FreelanceApplication()
@@ -286,10 +288,11 @@ def editapp(request, pk):
         freelance_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
         freelance_form.fields['status'].empty_label = 'Status:'
     except ObjectDoesNotExist:
-        pass
+        return render(request, 'backend/error.html',
+                      context={'message': "Exception: Application not found or you don't have permission to view!"})
 
     try:
-        application = PermanentApplication.objects.get(app_id=pk)
+        application = PermanentApplication.objects.get(user=idnum,app_id=pk)
         form = forms.PermanentApplication(instance=application)
         app_type = 'permanent'
         permanent_form = forms.PermanentApplication()
@@ -299,7 +302,8 @@ def editapp(request, pk):
         permanent_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
         permanent_form.fields['status'].empty_label = 'Status:'
     except ObjectDoesNotExist:
-        pass
+        return render(request, 'backend/error.html',
+                      context={'message': "Exception: Application not found or you don't have permission to view!"})
 
     form.fields['company'] = forms.ModelChoiceField(
         Company.objects.filter(user=idnum).order_by('company_name'), required=False)
@@ -341,20 +345,21 @@ def editapp(request, pk):
 
 @login_required
 def deleteapp(request, pk):
-    application = Application.objects.get(app_id=pk)
+    idnum = request.user.pk
+    application = Application.objects.get(user=idnum,app_id=pk)
     application.delete()
     return redirect('applist')
 
 
 @login_required
 def company(request, pk):
-
+    idnum = request.user.pk
     try:
-        company = Company.objects.get(company_id=pk)
+        company = Company.objects.get(user=idnum,company_id=pk)
         application_count = Application.objects.filter(company=pk).count()
     except ObjectDoesNotExist:
         return render(request, 'backend/error.html',
-                      context={'message': "Exception: Company with id " + str(pk) + " not found!"})
+                      context={'message': "Exception: Company not found or you don't have permission to view!"})
 
     context = {'company': company, 'application_count': application_count, 'user': request.user}
     return render(request, 'backend/company.html', context)
@@ -402,7 +407,8 @@ def createcompany(request):
 
 @login_required
 def editcompany(request, pk):
-    company = Company.objects.get(company_id=pk)
+    idnum = request.user.pk
+    company = Company.objects.get(user=idnum,company_id=pk)
     form = forms.Company(instance=company)
     context = {'form': form, 'company': company, 'user': request.user}
     if request.method == 'POST':
@@ -418,6 +424,7 @@ def editcompany(request, pk):
 
 @login_required
 def deletecompany(request, pk):
-    company = Company.objects.get(company_id=pk)
+    idnum = request.user.pk
+    company = Company.objects.get(user=idnum,company_id=pk)
     company.delete()
     return redirect('companylist')
