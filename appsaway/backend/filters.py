@@ -119,15 +119,16 @@ class PermanentFilter(django_filters.FilterSet):
 
 class CompanyFilter(django_filters.FilterSet):
     company_name = CharFilter(field_name='company_name', lookup_expr='icontains', label="Company",
-                              widget=TextInput(attrs={'placeholder': 'Company', 'style': 'width:100%;'}))
-    contact_name = CharFilter(field_name='contact_name', lookup_expr='icontains', label="Contact Name",
-                              widget=TextInput(attrs={'placeholder': 'Contact', 'style': 'width:100%;'}))
-    contact_email = CharFilter(field_name='contact_email', lookup_expr='icontains', label='Contact Email',
-                               widget=TextInput(attrs={'placeholder': 'Email', 'style': 'width:100%;'}))
-    contact_phone = CharFilter(field_name='contact_phone', lookup_expr='icontains', label='Contact Phone',
-                               widget=TextInput(attrs={'placeholder': 'Phone', 'style': 'width:100%;'}))
-    company_notes = CharFilter(field_name='company_notes', lookup_expr='icontains', label='Notes',
-                               widget=TextInput(attrs={'placeholder': 'Notes', 'style': 'width:100%;'}))
+                              widget=TextInput(attrs={'placeholder': 'Company', 'style': 'width:100%;', 'required': 'True'}))
+    # Additional form search fields.. not in use!
+    # contact_name = CharFilter(field_name='contact_name', lookup_expr='icontains', label="Contact Name",
+    #                           widget=TextInput(attrs={'placeholder': 'Contact', 'style': 'width:100%;'}))
+    # contact_email = CharFilter(field_name='contact_email', lookup_expr='icontains', label='Contact Email',
+    #                            widget=TextInput(attrs={'placeholder': 'Email', 'style': 'width:100%;'}))
+    # contact_phone = CharFilter(field_name='contact_phone', lookup_expr='icontains', label='Contact Phone',
+    #                            widget=TextInput(attrs={'placeholder': 'Phone', 'style': 'width:100%;'}))
+    # company_notes = CharFilter(field_name='company_notes', lookup_expr='icontains', label='Notes',
+    #                            widget=TextInput(attrs={'placeholder': 'Notes', 'style': 'width:100%;'}))
 
     class Meta:
         model = Company
