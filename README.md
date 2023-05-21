@@ -10,7 +10,7 @@ Track your job applications and the companies you apply for. Easily generate rep
   Application Types: Contract, Freelance, and Permanent.
 
 ## Requirements:
-- Python 3.10.0
+- Python 3.11.3
 - virtualenv
 
 ## Install (Local):
