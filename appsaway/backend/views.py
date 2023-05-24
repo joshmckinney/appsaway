@@ -264,43 +264,38 @@ def editapp(request, pk):
     application = None
 
     try:
-        application = ContractApplication.objects.get(user=idnum,app_id=pk)
-        form = forms.ContractApplication(instance=application)
-        app_type = 'contract'
-        contract_form = forms.ContractApplication()
-        contract_form.fields['company'] = forms.ModelChoiceField(
-            Company.objects.filter(user=idnum).order_by('company_name'), required=False)
-        contract_form.fields['company'].empty_label = 'Select Company:'
-        contract_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
-        contract_form.fields['status'].empty_label = 'Status:'
-    except ObjectDoesNotExist:
-        return render(request, 'backend/error.html',
-                      context={'message': "Exception: Application not found or you don't have permission to view!"})
-
-    try:
-        application = FreelanceApplication.objects.get(user=idnum, app_id=pk)
-        form = forms.FreelanceApplication(instance=application)
-        app_type = 'freelance'
-        freelance_form = forms.FreelanceApplication()
-        freelance_form.fields['company'] = forms.ModelChoiceField(
-            Company.objects.filter(user=idnum).order_by('company_name'), required=False)
-        freelance_form.fields['company'].empty_label = 'Select Company:'
-        freelance_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
-        freelance_form.fields['status'].empty_label = 'Status:'
-    except ObjectDoesNotExist:
-        return render(request, 'backend/error.html',
-                      context={'message': "Exception: Application not found or you don't have permission to view!"})
-
-    try:
-        application = PermanentApplication.objects.get(user=idnum,app_id=pk)
-        form = forms.PermanentApplication(instance=application)
-        app_type = 'permanent'
-        permanent_form = forms.PermanentApplication()
-        permanent_form.fields['company'] = forms.ModelChoiceField(
-            Company.objects.filter(user=idnum).order_by('company_name'), required=False)
-        permanent_form.fields['company'].empty_label = 'Select Company:'
-        permanent_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
-        permanent_form.fields['status'].empty_label = 'Status:'
+        application = Application.objects.get(user=idnum,app_id=pk)
+        if isinstance(application, ContractApplication):
+            application = ContractApplication.objects.get(user=idnum,app_id=pk)
+            form = forms.ContractApplication(instance=application)
+            app_type = 'contract'
+            contract_form = forms.ContractApplication()
+            contract_form.fields['company'] = forms.ModelChoiceField(
+                Company.objects.filter(user=idnum).order_by('company_name'), required=False)
+            contract_form.fields['company'].empty_label = 'Select Company:'
+            contract_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
+            contract_form.fields['status'].empty_label = 'Status:'
+        elif isinstance(application, FreelanceApplication):
+            application = FreelanceApplication.objects.get(user=idnum, app_id=pk)
+            form = forms.FreelanceApplication(instance=application)
+            app_type = 'freelance'
+            freelance_form = forms.FreelanceApplication()
+            freelance_form.fields['company'] = forms.ModelChoiceField(
+                Company.objects.filter(user=idnum).order_by('company_name'), required=False)
+            freelance_form.fields['company'].empty_label = 'Select Company:'
+            freelance_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
+            freelance_form.fields['status'].empty_label = 'Status:'
+        else:
+            application = PermanentApplication.objects.get(user=idnum,app_id=pk)
+            form = forms.PermanentApplication(instance=application)
+            app_type = 'permanent'
+            permanent_form = forms.PermanentApplication()
+            permanent_form.fields['company'] = forms.ModelChoiceField(
+                Company.objects.filter(user=idnum).order_by('company_name'), required=False)
+            permanent_form.fields['company'].empty_label = 'Select Company:'
+            permanent_form.fields['status'] = ChoiceField(choices=status_choices, required=True)
+            permanent_form.fields['status'].empty_label = 'Status:'
+            context = {'application': application, 'app_type': app_type, 'user': request.user}
     except ObjectDoesNotExist:
         return render(request, 'backend/error.html',
                       context={'message': "Exception: Application not found or you don't have permission to view!"})
